@@ -1,0 +1,68 @@
+<mvc:View displayBlock="true"       
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:core="sap.ui.core"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:grid="sap.ui.layout.cssgrid"
+  xmlns:card="sap.f.cards"
+  controllerName="corona.Corona.controller.Detail">
+  <Page id="DetailPage" title="{i18n>detailHeader}" showNavButton="true" navButtonPress=".navToHome">
+    <content>
+    <f:GridList class="sapUiResponsiveContentPadding">
+        <f:customLayout>
+            <grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem" />
+        </f:customLayout>
+        <f:GridListItem>
+            <VBox height="150px" alignItems="Center" justifyContent="Center"  >
+                <layoutData>
+                    <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                </layoutData>
+                <ObjectStatus text="{countriesData>totalCases}" class="sapMObjectStatusLarge" />
+                <ObjectStatus text="{i18n>totalCases}" />
+            </VBox>
+        </f:GridListItem>
+        <f:GridListItem>
+            <VBox height="150px" alignItems="Center" justifyContent="Center"  >
+                <layoutData>
+                    <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                </layoutData>
+                <ObjectStatus text="{countriesData>totalRecovered}" class="sapMObjectStatusLarge" state="Success"/>
+                <ObjectStatus text="{i18n>totalRecovered}" />
+            </VBox>
+        </f:GridListItem>
+        <f:GridListItem>
+            <VBox height="150px" alignItems="Center" justifyContent="Center"  >
+                <layoutData>
+                    <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                </layoutData>
+                <ObjectStatus text="{countriesData>totalDeaths}" class="sapMObjectStatusLarge" state="Error"/>
+                <ObjectStatus text="{i18n>totalDeaths}" />
+            </VBox>
+        </f:GridListItem>
+	</f:GridList>
+    <f:GridList class="sapUiResponsiveContentPadding">
+        <f:customLayout>
+            <grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem" />
+        </f:customLayout>
+        <f:GridListItem>
+            <VBox height="150px" alignItems="Center" justifyContent="Center"  >
+                <layoutData>
+                    <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                </layoutData>
+                <ObjectStatus text="{countriesData>newCases}" class="sapMObjectStatusLarge" />
+                <ObjectStatus text="{i18n>newCases}" />
+            </VBox>
+        </f:GridListItem>
+        <f:GridListItem>
+            <VBox height="150px" alignItems="Center" justifyContent="Center"  >
+                <layoutData>
+                    <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                </layoutData>
+                <ObjectStatus text="{countriesData>newDeaths}" class="sapMObjectStatusLarge" state="Error"/>
+                <ObjectStatus text="{i18n>newDeaths}" />
+            </VBox>
+        </f:GridListItem>
+	</f:GridList>
+    </content>
+  </Page>
+</mvc:View>

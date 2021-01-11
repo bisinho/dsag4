@@ -1,0 +1,108 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:f="sap.f"
+    xmlns="sap.m"
+    xmlns:micro="sap.suite.ui.microchart"
+    xmlns:layout="sap.ui.layout"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    controllerName="corona.Corona.controller.Home"
+    displayBlock="true">
+    <Page id="page" title="{i18n>title}" busy="{viewModel>/busy}" busyIndicatorDelay="{viewModel>/delay}">
+        <content>
+            <f:GridList class="sapUiResponsiveContentPadding">
+                <f:customLayout>
+			        <grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem" />
+		        </f:customLayout>
+                <f:GridListItem>
+                    <VBox height="150px" alignItems="Center" justifyContent="Center"  >
+                        <layoutData>
+                            <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                        </layoutData>
+                        <ObjectStatus text="{i18n>totalCases}" class="sapMObjectStatusLarge" />
+                        <ObjectStatus text="{totalData>/totalCases}" class="sapMObjectStatusLarge" />
+                    </VBox>
+                </f:GridListItem>
+                <f:GridListItem>
+                    <VBox height="150px" alignItems="Center" justifyContent="Center"  >
+                        <layoutData>
+                            <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                        </layoutData>
+                        <ObjectStatus text="{i18n>totalRecovered}" class="sapMObjectStatusLarge" />
+                        <ObjectStatus text="{totalData>/totalRecovered}" class="sapMObjectStatusLarge" state="Success"/>
+                    </VBox>
+                </f:GridListItem>
+                <f:GridListItem>
+                    <VBox height="150px" alignItems="Center" justifyContent="Center"  >
+                        <layoutData>
+                            <FlexItemData growFactor="1" shrinkFactor="0" /><!-- Don't shrink below minimum size. Fill space if available. -->
+                        </layoutData>
+                        <ObjectStatus text="{i18n>totalDeaths}" class="sapMObjectStatusLarge" />
+                        <ObjectStatus text="{totalData>/totalDeaths}" class="sapMObjectStatusLarge" state="Error"/>
+                    </VBox>
+                </f:GridListItem>
+		    </f:GridList>
+            <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+            <items>
+				<IconTabFilter text="{i18n>statistics}" id="iconTabBarFilter1" icon="sap-icon://bar-chart" tooltip="{i18n>statistics}" key="statistics">
+                <content>
+                <f:GridList id="countriesList" items="{countriesData>/}" noDataText="{i18n>noDataText}">
+                    <f:customLayout>
+                        <grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem" />
+                    </f:customLayout>
+                    <f:GridListItem press="navToDetailPage" type= "Navigation">
+                        <VBox height="100%">
+                            <HBox height="100%" class="sapUiSmallMargin" alignItems="Center" >
+                                <Image src="{path: 'countriesData>country', formatter:'.formatIconFlag'}" width="3rem" class="sapUiSmallMarginEnd" />
+                                <VBox>
+                                    <ObjectStatus text="{countriesData>country}" class="sapMObjectStatusLarge"/>
+                                    <ObjectStatus title="{i18n>totalCases}" text="{countriesData>totalCases}"/>
+                                    <ObjectStatus title="{i18n>newCases}" text="{countriesData>newCases}" state="Error"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                    </f:GridListItem>
+                </f:GridList>
+                </content>
+                </IconTabFilter>
+                <IconTabFilter text="{i18n>news}" id="iconTabBarFilter2" icon="sap-icon://newspaper" tooltip="{i18n>news}" key="news">
+                    <List id="newsList" headerText="{i18n>news}" items="{coronaNews>/}">
+                        <items>
+                            <StandardListItem
+                                title="{coronaNews>name}"
+                                description="{coronaNews>description}"
+                                icon="{coronaNews>image}"
+                                iconDensityAware="false"
+                                wrapping="true"
+                                type="Navigation"
+                                press=".navToNewspaper"
+                                iconInset="false" />
+                        </items>
+                    </List>
+                </IconTabFilter>
+                <IconTabFilter text="{i18n>graph}" id="iconTabBarFilter3" icon="sap-icon://business-objects-experience" tooltip="{i18n>graph}" key="graph">
+                    <layout:Grid defaultSpan="XL6 L6 M6 S12">
+                    <layout:VerticalLayout>
+                        <layout:layoutData>
+                            <layout:GridData span="XL12 L12 M12 S12"/>
+                        </layout:layoutData>
+                        <FlexBox width="800px" height="400px" alignItems="Center" class="sapUiSmallMargin" >
+                            <items>
+                                <micro:InteractiveBarChart labelWidth="25%" displayedBars="6" bars="{continentData>/}" >
+                                    <micro:bars>
+                                        <micro:InteractiveBarChartBar label="{continentData>continent}"  value="{=Number.parseFloat(${continentData>totalCases})}" />
+                                    </micro:bars>
+                                </micro:InteractiveBarChart>
+                            </items>
+                        </FlexBox>
+                        </layout:VerticalLayout>
+                    </layout:Grid>
+                </IconTabFilter>
+			</items>
+            </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>
