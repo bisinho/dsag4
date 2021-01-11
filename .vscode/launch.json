@@ -1,0 +1,27 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Corona-Corona",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/corona-approuter/node_modules/@sap/html5-repo-mock/index.js",
+      "args": [
+        "--standalone",
+        "/coronaCorona/index.html",
+        "--ui5",
+        "{\"version\":\".\"}"
+      ],
+      "cwd": "${workspaceFolder}/Corona",
+      "env": {
+        "PORT": "6004",
+        "MOCK_LOOKUP_DIRS": "[\"webapp\"]",
+        "run.config": "{\"handlerId\":\"ui5_run_config_handler_id\",\"runnableId\":\"/home/user/projects/Corona/Corona\"}"
+      },
+      "envFile": "${workspaceFolder}/Corona/.env2",
+      "preLaunchTask": "Build Corona"
+    }
+  ]
+}

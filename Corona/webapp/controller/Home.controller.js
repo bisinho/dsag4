@@ -12,9 +12,11 @@ sap.ui.define([
 
     return Controller.extend("corona.Corona.controller.Home", {
         onInit: function () {
+            var currentDate = new Date();
             var oViewModel = new JSONModel({
                 busy: false,
-                delay: 0
+                delay: 0,
+                date: currentDate
             });
 
             this.getView().setModel(oViewModel, "viewModel");
