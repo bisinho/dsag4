@@ -12,6 +12,7 @@
     controllerName="corona.Corona.controller.Home"
     displayBlock="true">
     <Page id="page" title="{i18n>title}" busy="{viewModel>/busy}" busyIndicatorDelay="{viewModel>/delay}">
+    
         <content>
             <f:GridList class="sapUiResponsiveContentPadding">
                 <f:customLayout>
